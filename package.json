@@ -1,6 +1,21 @@
 {
-  "name": "timaxjsclient",
-  "version": "0.0.0",
+  "name": "timax.js-client",
+  "version": "1.0.0",
+  "private": true,
+  "description": "the REST client",
+  "keywords": [
+    "timax",
+    "timetracking"
+  ],
+  "author": "Benjamin Lutz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjaminlutz/timax.js-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benjaminlutz/timax.js-client/issues"
+  },
   "dependencies": {},
   "repository": {},
   "devDependencies": {

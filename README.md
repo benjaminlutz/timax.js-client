@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/benjaminlutz/timax.js-client.svg)](https://travis-ci.org/benjaminlutz/timax.js-client)
+[![Dependency Status](https://david-dm.org/benjaminlutz/timax.js-client/status.png)](https://david-dm.org/benjaminlutz/timax.js-client)
+[![Dev Dependency Status](https://david-dm.org/benjaminlutz/timax.js-client/dev-status.png)](https://david-dm.org/benjaminlutz/timax.js-client)
+
 # timax.js-client
 timax.js - the client
 
