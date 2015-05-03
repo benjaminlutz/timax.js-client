@@ -23,8 +23,10 @@ angular
     })
 
     .config(function ($httpProvider) {
+        // needed for CORS
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
         $httpProvider.interceptors.push('authTokenInterceptor');
     })
 

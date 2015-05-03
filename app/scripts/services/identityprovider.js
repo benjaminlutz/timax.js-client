@@ -7,12 +7,8 @@ angular.module('timaxjsClientApp')
     .factory('identityproviderService', function ($q, $http, localStorageService) {
         var factoryObject = {};
 
-        factoryObject.getToken = function () {
-            var deferred = $q.defer(),
-                authData = {
-                    email: 'admin@test.com',
-                    password: 'geheim'
-                };
+        factoryObject.getToken = function (authData) {
+            var deferred = $q.defer();
 
             $http.post('http://localhost:3000/identityprovider', authData).then(function (response) {
                 var token = response.data;
