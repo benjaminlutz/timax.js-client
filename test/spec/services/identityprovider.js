@@ -11,8 +11,4 @@ describe('Service: identityprovider', function () {
     identityprovider = _identityprovider_;
   }));
 
-  it('should do something', function () {
-    expect(!!identityprovider).toBe(true);
-  });
-
 });
