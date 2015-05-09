@@ -6,7 +6,7 @@
      */
     angular.module('timax.controllers.start', ['angularModalService', 'timax.controllers.modals.login', 'timax.services.authorisation'])
 
-        .controller('StartController', function ($scope, $route, $window, ModalService, authorisationService) {
+        .controller('StartController', function ($scope, $rootScope, $route, $window, ModalService, authorisationService) {
 
             $scope.isLoggedIn = authorisationService.getPrincipal();
 
@@ -17,7 +17,8 @@
                 }).then(function (modal) {
                     modal.element.modal();
                     modal.close.then(function () {
-                        $window.location.reload();
+                        $rootScope.$emit('reloadNavigation', true);
+                        $route.reload();
                     });
                 });
             };

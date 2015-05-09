@@ -6,10 +6,15 @@
      */
     angular.module('timax.controllers.logout', ['timax.services.authorisation'])
 
-        .controller('LogoutController', function ($timeout, $location, $window, authorisationService) {
-            console.log('logout controller...');
+        .controller('LogoutController', function ($timeout, $location, $route, $rootScope, authorisationService) {
             authorisationService.logout();
-            $window.location.href = '#/';
-            $window.location.reload();
+
+            if ($location.path() === '/') {
+                $route.reload();
+            } else {
+                $location.path('/');
+            }
+
+            $rootScope.$emit('reloadNavigation', false);
         });
 })();
