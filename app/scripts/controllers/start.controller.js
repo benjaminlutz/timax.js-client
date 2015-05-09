@@ -4,19 +4,16 @@
  * Main controller.
  */
 angular.module('timaxjsClientApp')
-    .controller('MainCtrl', function ($scope, ModalService, identityproviderService) {
+    .controller('StartController', function ($scope, ModalService) {
 
         $scope.showLoginDialog = function () {
             ModalService.showModal({
-                templateUrl: 'views/login.html',
-                controller: 'LoginController',
-                inputs: {
-                    identityproviderService: identityproviderService
-                }
+                templateUrl: 'views/modals/login.html',
+                controller: 'LoginController'
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    // $scope.message = result ? 'You said Yes' : 'You said No';
+                    // TODO reload page, navigate to some place or just do change something in the view...
                     console.log(result);
                 });
             });

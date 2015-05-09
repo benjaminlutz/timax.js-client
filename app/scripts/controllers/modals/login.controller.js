@@ -4,7 +4,7 @@
  * Login controller.
  */
 angular.module('timaxjsClientApp')
-    .controller('LoginController', function ($scope, $element, identityproviderService, close) {
+    .controller('LoginController', function ($scope, $element, identityProviderService, close) {
         $scope.hasError = false;
         $scope.credentials = {
             email: '',
@@ -12,7 +12,7 @@ angular.module('timaxjsClientApp')
         };
 
         $scope.login = function () {
-            identityproviderService.getToken($scope.credentials)
+            identityProviderService.getToken($scope.credentials)
                 .then(function () {
                     $element.modal('hide');
                     close(true, 500);

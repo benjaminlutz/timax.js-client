@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Identityprovider service.
+ * Identity provider service.
  */
 angular.module('timaxjsClientApp')
-    .factory('identityproviderService', function ($q, $http, localStorageService) {
+    .factory('identityProviderService', function ($q, $http, localStorageService) {
         var factoryObject = {};
 
         factoryObject.getToken = function (authData) {
