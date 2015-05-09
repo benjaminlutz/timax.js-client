@@ -4,18 +4,22 @@
     /**
      * Route navigation service.
      */
-    angular.module('timax.services.routeNavigation', [])
+    angular.module('timax.services.routeNavigation', ['timax.services.authorisation'])
 
-        .factory('routeNavigationService', function ($route, $location) {
+        .factory('routeNavigationService', function ($route, $location, authorisationService) {
             var routes = [];
+
             angular.forEach($route.routes, function (route, path) {
                 if (route.name) {
-                    routes.push({
-                        path: path,
-                        name: route.name
-                    });
+                    if (authorisationService.isAuthorized(route.requiredRole)) {
+                        routes.push({
+                            path: path,
+                            name: route.name
+                        });
+                    }
                 }
             });
+
             return {
                 routes: routes,
                 activeRoute: function (route) {

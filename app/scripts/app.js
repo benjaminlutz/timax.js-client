@@ -15,8 +15,10 @@
             'LocalStorageModule',
             'timax.config',
             'timax.controllers.start',
+            'timax.controllers.project',
             'timax.directives.navigation',
-            'timax.interceptors.authToken'
+            'timax.interceptors.authToken',
+            'timax.services.authorisation'
         ])
 
         .config(function (localStorageServiceProvider) {
@@ -38,8 +40,20 @@
             $routeProvider
                 .when('/', {
                     name: 'Start',
+                    requiredRole: 'none',
                     templateUrl: 'views/start.html',
                     controller: 'StartController'
+                })
+                .when('/projects', {
+                    name: 'Projects',
+                    requiredRole: 'manager',
+                    templateUrl: 'views/project.html',
+                    controller: 'ProjectController',
+                    resolve: {
+                        authorized: function (authorisationService) {
+                            return authorisationService.isAuthorizedAsync('manager');
+                        }
+                    }
                 })
                 .otherwise({
                     redirectTo: '/'
