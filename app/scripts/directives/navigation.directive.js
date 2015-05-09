@@ -14,6 +14,7 @@
                 controller: function ($scope) {
                     $scope.routes = routeNavigationService.routes;
                     $scope.activeRoute = routeNavigationService.activeRoute;
+                    $scope.principal = routeNavigationService.principal;
                 }
             };
         });

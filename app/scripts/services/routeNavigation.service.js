@@ -7,11 +7,12 @@
     angular.module('timax.services.routeNavigation', ['timax.services.authorisation'])
 
         .factory('routeNavigationService', function ($route, $location, authorisationService) {
-            var routes = [];
+            var routes = [], principal;
 
             angular.forEach($route.routes, function (route, path) {
                 if (route.name) {
-                    if (authorisationService.isAuthorized(route.requiredRole)) {
+                    principal = authorisationService.isAuthorized(route.requiredRole);
+                    if (principal) {
                         routes.push({
                             path: path,
                             name: route.name
@@ -24,7 +25,8 @@
                 routes: routes,
                 activeRoute: function (route) {
                     return route.path === $location.path();
-                }
+                },
+                principal: principal
             };
         });
 })();

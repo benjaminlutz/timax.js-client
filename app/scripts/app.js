@@ -15,7 +15,9 @@
             'LocalStorageModule',
             'timax.config',
             'timax.controllers.start',
+            'timax.controllers.logout',
             'timax.controllers.project',
+            'timax.controllers.booking',
             'timax.directives.navigation',
             'timax.interceptors.authToken',
             'timax.services.authorisation'
@@ -54,6 +56,21 @@
                             return authorisationService.isAuthorizedAsync('manager');
                         }
                     }
+                })
+                .when('/bookings', {
+                    name: 'Bookings',
+                    requiredRole: 'user',
+                    templateUrl: 'views/booking.html',
+                    controller: 'BookingController',
+                    resolve: {
+                        authorizedUser: function (authorisationService) {
+                            return authorisationService.isAuthorizedAsync('user');
+                        }
+                    }
+                })
+                .when('/logout', {
+                    controller: 'LogoutController',
+                    template: ''
                 })
                 .otherwise({
                     redirectTo: '/'

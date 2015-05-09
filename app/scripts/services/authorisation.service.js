@@ -9,6 +9,10 @@
         .factory('authorisationService', function ($q, localStorageService, jwtHelper) {
             var factoryObject = {};
 
+            factoryObject.logout = function () {
+                localStorageService.remove('token');
+            };
+
             factoryObject.getPrincipal = function () {
                 var tokenPayload,
                     authToken = localStorageService.get('token');
@@ -17,13 +21,13 @@
                     tokenPayload = jwtHelper.decodeToken(authToken);
 
                     if (jwtHelper.isTokenExpired(authToken)) {
-                        localStorageService.remove('token');
+                        factoryObject.logout();
                         return false;
                     } else {
                         return tokenPayload;
                     }
                 } catch (err) {
-                    localStorageService.remove('token');
+                    factoryObject.logout();
                     return false;
                 }
             };
