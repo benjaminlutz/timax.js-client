@@ -12,7 +12,9 @@ angular
         'ngSanitize',
         'ngTouch',
         'LocalStorageModule',
-        'angularModalService'
+        'timax.controllers',
+        'timax.directives',
+        'timax.interceptors'
     ])
 
     .config(function (localStorageServiceProvider) {

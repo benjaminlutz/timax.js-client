@@ -3,7 +3,7 @@
 /**
  * Login controller.
  */
-angular.module('timaxjsClientApp')
+angular.module('timax.controllers.modals', ['timax.services'])
     .controller('LoginController', function ($scope, $element, identityProviderService, close) {
         $scope.hasError = false;
         $scope.credentials = {

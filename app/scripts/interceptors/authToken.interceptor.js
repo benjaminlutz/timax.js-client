@@ -3,7 +3,7 @@
 /**
  * Authentication token interceptor.
  */
-angular.module('timaxjsClientApp')
+angular.module('timax.interceptors', ['LocalStorageModule'])
 
     .factory('authTokenInterceptor', function ($q, localStorageService) {
         return {

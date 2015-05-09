@@ -3,7 +3,7 @@
 /**
  * Route navigation service.
  */
-angular.module('timaxjsClientApp')
+angular.module('timax.services')
     .factory('routeNavigationService', function ($route, $location) {
         var routes = [];
         angular.forEach($route.routes, function (route, path) {

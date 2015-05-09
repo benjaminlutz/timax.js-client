@@ -3,7 +3,7 @@
 /**
  * Identity provider service.
  */
-angular.module('timaxjsClientApp')
+angular.module('timax.services', ['LocalStorageModule'])
     .factory('identityProviderService', function ($q, $http, localStorageService) {
         var factoryObject = {};
 

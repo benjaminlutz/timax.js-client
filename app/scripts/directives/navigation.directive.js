@@ -3,7 +3,7 @@
 /**
  * Navigation directive.
  */
-angular.module('timaxjsClientApp')
+angular.module('timax.directives', ['timax.services'])
     .directive('navigation', function (routeNavigationService) {
         return {
             restrict: 'E',
