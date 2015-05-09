@@ -1,25 +1,28 @@
-'use strict';
+(function () {
+    'use strict';
 
-/**
- * Identity provider service.
- */
-angular.module('timax.services', ['LocalStorageModule'])
-    .factory('identityProviderService', function ($q, $http, localStorageService) {
-        var factoryObject = {};
+    /**
+     * Identity provider service.
+     */
+    angular.module('timax.services', ['LocalStorageModule'])
 
-        factoryObject.getToken = function (authData) {
-            var deferred = $q.defer();
+        .factory('identityProviderService', function ($q, $http, localStorageService) {
+            var factoryObject = {};
 
-            $http.post('http://localhost:3000/identityprovider', authData).then(function (response) {
-                var token = response.data;
-                localStorageService.set('token', token);
-                deferred.resolve({token: token});
-            }, function (reason) {
-                deferred.reject(reason);
-            });
+            factoryObject.getToken = function (authData) {
+                var deferred = $q.defer();
 
-            return deferred.promise;
-        };
+                $http.post('http://localhost:3000/identityprovider', authData).then(function (response) {
+                    var token = response.data;
+                    localStorageService.set('token', token);
+                    deferred.resolve({token: token});
+                }, function (reason) {
+                    deferred.reject(reason);
+                });
 
-        return factoryObject;
-    });
+                return deferred.promise;
+            };
+
+            return factoryObject;
+        });
+})();

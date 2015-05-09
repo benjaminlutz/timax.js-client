@@ -1,27 +1,30 @@
-'use strict';
+(function () {
+    'use strict';
 
-/**
- * Login controller.
- */
-angular.module('timax.controllers.modals', ['timax.services'])
-    .controller('LoginController', function ($scope, $element, identityProviderService, close) {
-        $scope.hasError = false;
-        $scope.credentials = {
-            email: '',
-            password: ''
-        };
+    /**
+     * Login controller.
+     */
+    angular.module('timax.controllers.modals', ['timax.services'])
 
-        $scope.login = function () {
-            identityProviderService.getToken($scope.credentials)
-                .then(function () {
-                    $element.modal('hide');
-                    close(true, 500);
-                }, function () {
-                    $scope.hasError = true;
-                });
-        };
+        .controller('LoginController', function ($scope, $element, identityProviderService, close) {
+            $scope.hasError = false;
+            $scope.credentials = {
+                email: '',
+                password: ''
+            };
 
-        $scope.close = function (result) {
-            close(result, 500);
-        };
-    });
+            $scope.login = function () {
+                identityProviderService.getToken($scope.credentials)
+                    .then(function () {
+                        $element.modal('hide');
+                        close(true, 500);
+                    }, function () {
+                        $scope.hasError = true;
+                    });
+            };
+
+            $scope.close = function (result) {
+                close(result, 500);
+            };
+        });
+})();
