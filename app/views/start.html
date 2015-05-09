@@ -4,5 +4,8 @@
     <img src="images/clock-huge.png"><br>
     A day without time tracking is like a day without sunshine.
   </p>
-  <p><a class="btn btn-lg btn-success" ng-click="showLoginDialog()">Logon</span></a></p>
+  <p>
+    <a class="btn btn-lg btn-success" ng-show="isLoggedIn" href="#/bookings">Let's go!</span></a>
+    <a class="btn btn-lg btn-primary" ng-hide="isLoggedIn" ng-click="showLoginDialog()">Logon!</span></a>
+  </p>
 </div>

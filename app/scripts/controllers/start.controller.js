@@ -4,9 +4,12 @@
     /**
      * Main controller.
      */
-    angular.module('timax.controllers.start', ['angularModalService', 'timax.controllers.modals.login'])
+    angular.module('timax.controllers.start', ['angularModalService', 'timax.controllers.modals.login', 'timax.services.authorisation'])
 
-        .controller('StartController', function ($scope, $route, $window, ModalService) {
+        .controller('StartController', function ($scope, $route, $window, ModalService, authorisationService) {
+
+            $scope.isLoggedIn = authorisationService.getPrincipal();
+
             $scope.showLoginDialog = function () {
                 ModalService.showModal({
                     templateUrl: 'views/modals/login.html',
