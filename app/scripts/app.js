@@ -50,7 +50,7 @@
                     templateUrl: 'views/project.html',
                     controller: 'ProjectController',
                     resolve: {
-                        authorized: function (authorisationService) {
+                        authorizedUser: function (authorisationService) {
                             return authorisationService.isAuthorizedAsync('manager');
                         }
                     }

@@ -17,44 +17,47 @@
                     tokenPayload = jwtHelper.decodeToken(authToken);
 
                     if (jwtHelper.isTokenExpired(authToken)) {
+                        localStorageService.remove('token');
                         return false;
                     } else {
                         return tokenPayload;
                     }
                 } catch (err) {
+                    localStorageService.remove('token');
                     return false;
                 }
             };
 
             factoryObject.isAuthorized = function (requiredRole) {
-                var principal, role;
+                var role,
+                    principal = factoryObject.getPrincipal();
 
                 if (requiredRole === 'none') {
-                    return true;
+                    return principal || true;
                 }
 
-                principal = factoryObject.getPrincipal();
                 if (angular.isObject(principal) === false) {
                     return false;
                 }
 
                 role = principal.role;
                 if (requiredRole === 'user') {
-                    return (role === 'user' || role === 'manager' || role === 'admin');
+                    return (role === 'user' || role === 'manager' || role === 'admin') ? principal : false;
                 } else if (requiredRole === 'manager') {
-                    return (role === 'manager' || role === 'admin');
+                    return (role === 'manager' || role === 'admin') ? principal : false;
                 } else if (requiredRole === 'admin') {
-                    return (role === 'admin');
+                    return (role === 'admin') ? principal : false;
                 } else {
                     return false;
                 }
             };
 
             factoryObject.isAuthorizedAsync = function (requiredRole) {
-                var deferred = $q.defer();
+                var deferred = $q.defer(),
+                    principal = factoryObject.isAuthorized(requiredRole);
 
-                if (factoryObject.isAuthorized(requiredRole)) {
-                    deferred.resolve(true);
+                if (principal) {
+                    deferred.resolve(principal);
                 } else {
                     deferred.reject(false);
                 }
