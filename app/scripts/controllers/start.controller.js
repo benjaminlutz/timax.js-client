@@ -4,7 +4,7 @@
     /**
      * Main controller.
      */
-    angular.module('timax.controllers', ['angularModalService', 'timax.controllers.modals'])
+    angular.module('timax.controllers.start', ['angularModalService', 'timax.controllers.modals.login'])
 
         .controller('StartController', function ($scope, ModalService) {
             $scope.showLoginDialog = function () {

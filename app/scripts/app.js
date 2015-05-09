@@ -13,9 +13,10 @@
             'ngSanitize',
             'ngTouch',
             'LocalStorageModule',
-            'timax.controllers',
-            'timax.directives',
-            'timax.interceptors'
+            'timax.config',
+            'timax.controllers.start',
+            'timax.directives.navigation',
+            'timax.interceptors.authToken'
         ])
 
         .config(function (localStorageServiceProvider) {

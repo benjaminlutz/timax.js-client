@@ -4,7 +4,7 @@
     /**
      * Navigation directive.
      */
-    angular.module('timax.directives', ['timax.services'])
+    angular.module('timax.directives.navigation', ['timax.services.routeNavigation'])
 
         .directive('navigation', function (routeNavigationService) {
             return {

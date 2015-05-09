@@ -4,7 +4,7 @@
     /**
      * Route navigation service.
      */
-    angular.module('timax.services')
+    angular.module('timax.services.routeNavigation', [])
 
         .factory('routeNavigationService', function ($route, $location) {
             var routes = [];

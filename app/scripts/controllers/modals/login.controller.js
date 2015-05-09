@@ -4,7 +4,7 @@
     /**
      * Login controller.
      */
-    angular.module('timax.controllers.modals', ['timax.services'])
+    angular.module('timax.controllers.modals.login', ['timax.services.identityProvider'])
 
         .controller('LoginController', function ($scope, $element, identityProviderService, close) {
             $scope.hasError = false;

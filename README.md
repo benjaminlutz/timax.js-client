@@ -34,6 +34,15 @@ To install front-end dependencies you're going to bower, in the application fold
 $ bower install
 ```
 
+## Configure
+You can find all the configuration in the 
+
+```
+app/scripts/config.js
+```
+
+file.
+
 ## Start the application
 If everything is installed and configured, just type the following command to start the application:
 
