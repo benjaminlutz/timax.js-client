@@ -38,12 +38,7 @@
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav" ng-controller="NavigationCtrl">
-              <li ng-class="{ active: isActive('/')}"><a ng-href="#/">Start</a></li>
-              <li ng-class="{ active: isActive('/projects')}"><a ng-href="#/projects">Projects</a></li>
-              <li ng-class="{ active: isActive('/bookings')}"><a ng-href="#/bookings">Bookings</a></li>
-            </ul>
+            <navigation></navigation>
           </div>
         </div>
       </div>
@@ -78,10 +73,11 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/navigation.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/services/identityprovider.js"></script>
+        <script src="scripts/services/routeNavigation.service.js"></script>
+        <script src="scripts/directives/navigation.directive.js"></script>
         <script src="scripts/interceptors/authToken.interceptor.js"></script>
         <!-- endbuild -->
 </body>
