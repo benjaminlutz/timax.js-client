@@ -5,8 +5,12 @@
             <a href="#{{ route.path }}">{{ route.name }}</a>
         </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right" ng-show="principal">
-        <li><a href="#/logout">Logout</a></li>
+    <ul ng-show="principal" class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ principal.firstName }} {{ principal.lastName }} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#/logout">Logout</a></li>
+            </ul>
+        </li>
     </ul>
-    <p ng-show="principal" class="navbar-text navbar-right">({{ principal.email }})</p>
 </div>
