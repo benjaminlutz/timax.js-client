@@ -12,7 +12,7 @@
             factoryObject.getToken = function (authData) {
                 var deferred = $q.defer();
 
-                $http.post(timaxConfig.IDENTITY_PROVIDER, authData).then(function (response) {
+                $http.post(timaxConfig.IDENTITY_PROVIDER, authData, {skipGenericErrorHandling: true}).then(function (response) {
                     var token = response.data;
                     localStorageService.set('token', token);
                     deferred.resolve({token: token});

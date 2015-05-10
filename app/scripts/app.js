@@ -20,6 +20,7 @@
             'timax.controllers.booking',
             'timax.directives.navigation',
             'timax.interceptors.authToken',
+            'timax.interceptors.httpError',
             'timax.services.authorisation',
             'timax.services.project'
         ])
@@ -37,6 +38,7 @@
             delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
             $httpProvider.interceptors.push('authTokenInterceptor');
+            $httpProvider.interceptors.push('httpErrorInterceptor');
         })
 
         .config(function ($routeProvider) {
