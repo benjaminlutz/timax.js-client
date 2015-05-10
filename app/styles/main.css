@@ -193,3 +193,14 @@ body {
     color: #a94442;
     display: inline;
 }
+
+.pagination > .active > a,
+.pagination > .active > a:hover {
+    background-color: #a0c52a;
+    border-color: #a0c52a;
+}
+
+.pagination > li > a,
+.pagination > li > a:hover {
+    color: #a0c52a;
+}

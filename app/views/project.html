@@ -27,13 +27,16 @@
                     <span class="glyphicon glyphicon-edit"></span> <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Manage users</a></li>
+                    <li><a href="#/bookings/{{ project._id }}">Show bookings</a></li>
+                    <li><a href="#/projects/users/{{ project._id }}">Manage users</a></li>
                 </ul>
             </div>
         </td>
     </tr>
     </tbody>
 </table>
+
+<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 <h3 ng-show="canCreateNewProjects()">Add new Project</h3>
 
