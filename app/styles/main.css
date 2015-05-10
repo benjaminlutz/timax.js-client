@@ -183,3 +183,13 @@ body {
     background-color: #a0c52a;
     border-color: #a0c520;
 }
+
+.form-group .ng-dirty.ng-valid {
+    color: #a0c52a;
+    display: inline;
+}
+
+.form-group .ng-dirty.ng-invalid {
+    color: #a94442;
+    display: inline;
+}
