@@ -1,11 +1,12 @@
 <div class="jumbotron">
-  <h1>timax.js</h1>
+  <h1 ng-show="principal">Welcome {{ principal.firstName }} {{ principal.lastName }}!</h1>
+  <h1 ng-hide="principal">timax.js</h1>
   <p class="lead">
     <img src="images/clock-huge.png"><br>
     A day without time tracking is like a day without sunshine.
   </p>
   <p>
-    <a class="btn btn-lg btn-success" ng-show="isLoggedIn" href="#/bookings">Let's go!</span></a>
-    <a class="btn btn-lg btn-primary" ng-hide="isLoggedIn" ng-click="showLoginDialog()">Logon!</span></a>
+    <a class="btn btn-lg btn-success" ng-show="principal" href="#/bookings">Let's go!</span></a>
+    <a class="btn btn-lg btn-primary" ng-hide="principal" ng-click="showLoginDialog()">Logon!</span></a>
   </p>
 </div>

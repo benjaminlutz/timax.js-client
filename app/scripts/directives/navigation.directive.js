@@ -12,18 +12,20 @@
                 replace: true,
                 templateUrl: 'views/directives/navigation.directive.html',
                 controller: function ($scope, $rootScope) {
-                    $scope.routes = routeNavigationService.routes;
-                    $scope.activeRoute = routeNavigationService.activeRoute;
-                    $scope.principal = routeNavigationService.principal;
 
-                    $rootScope.$on('reloadNavigation', function (event, data) {
-                        if (data === true) {
-                            console.log('refresh navigation... after login');
-                        } else {
-                            console.log('refresh navigation... after logout');
-                            $scope.principal = false;
-                        }
+                    function setRouteNavigationData() {
+                        var routeNavigationObject = routeNavigationService.generateRouteNavigationItems();
+                        $scope.routes = routeNavigationObject.routes;
+                        $scope.activeRoute = routeNavigationObject.activeRoute;
+                        $scope.principal = routeNavigationObject.principal;
+                    }
+
+                    $rootScope.$on('reloadNavigation', function () {
+                        setRouteNavigationData();
                     });
+
+                    // init
+                    setRouteNavigationData();
                 }
             };
         });

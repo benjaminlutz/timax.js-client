@@ -15,6 +15,6 @@
                 $location.path('/');
             }
 
-            $rootScope.$emit('reloadNavigation', false);
+            $rootScope.$emit('reloadNavigation');
         });
 })();

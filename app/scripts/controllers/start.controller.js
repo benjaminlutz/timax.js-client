@@ -8,7 +8,7 @@
 
         .controller('StartController', function ($scope, $rootScope, $route, $window, ModalService, authorisationService) {
 
-            $scope.isLoggedIn = authorisationService.getPrincipal();
+            $scope.principal = authorisationService.getPrincipal();
 
             $scope.showLoginDialog = function () {
                 ModalService.showModal({
@@ -17,7 +17,7 @@
                 }).then(function (modal) {
                     modal.element.modal();
                     modal.close.then(function () {
-                        $rootScope.$emit('reloadNavigation', true);
+                        $rootScope.$emit('reloadNavigation');
                         $route.reload();
                     });
                 });
