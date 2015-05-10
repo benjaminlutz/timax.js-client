@@ -1,3 +1,35 @@
 <h1>Projects</h1>
 
-<p>Hallo {{ firstName }} {{ lastName }}!</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Project ID</th>
+        <th>Description</th>
+        <th>Num of users</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="project in projects">
+        <td>
+            {{ project.project_id }}
+        </td>
+        <td>
+            {{ project.description }}
+        </td>
+        <td>
+            {{ project.users.length }}
+        </td>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="glyphicon glyphicon-edit"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Manage users</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -7,7 +7,7 @@
     angular.module('timax.config', [])
 
         .constant('timaxConfig', {
-            'backend': 'http://localhost:3000/',
-            'identityProvider': 'http://localhost:3000/identityprovider'
+            'BACKEND': 'http://localhost:3000/',
+            'IDENTITY_PROVIDER': 'http://localhost:3000/identityprovider'
         });
 })();

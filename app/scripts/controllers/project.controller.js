@@ -6,8 +6,7 @@
      */
     angular.module('timax.controllers.project', [])
 
-        .controller('ProjectController', function ($scope, authorizedUser) {
-            $scope.firstName = authorizedUser.firstName;
-            $scope.lastName = authorizedUser.lastName;
+        .controller('ProjectController', function ($scope, authorizedUser, projects) {
+            $scope.projects = projects;
         });
 })();

@@ -20,7 +20,8 @@
             'timax.controllers.booking',
             'timax.directives.navigation',
             'timax.interceptors.authToken',
-            'timax.services.authorisation'
+            'timax.services.authorisation',
+            'timax.services.project'
         ])
 
         .config(function (localStorageServiceProvider) {
@@ -54,6 +55,9 @@
                     resolve: {
                         authorizedUser: function (authorisationService) {
                             return authorisationService.isAuthorizedAsync('manager');
+                        },
+                        projects: function (projectService) {
+                            return projectService.getAllProjects();
                         }
                     }
                 })
