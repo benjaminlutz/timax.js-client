@@ -23,6 +23,18 @@
                 return deferred.promise;
             };
 
+            factoryObject.saveNewProject = function (newProject) {
+                var deferred = $q.defer();
+
+                $http.post(timaxConfig.BACKEND + PROJECT_RESOURCE_URL, newProject).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
+
             return factoryObject;
         });
 })();

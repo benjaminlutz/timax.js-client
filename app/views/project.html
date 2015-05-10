@@ -18,11 +18,12 @@
             {{ project.description }}
         </td>
         <td>
-            {{ project.users.length }}
+            <span class="badge">{{ project.users.length }}</span>
         </td>
         <td>
             <div class="btn-group">
-                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
                     <span class="glyphicon glyphicon-edit"></span> <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
@@ -33,3 +34,25 @@
     </tr>
     </tbody>
 </table>
+
+<h3 ng-show="canCreateNewProjects()">Add new Project</h3>
+
+<form ng-show="canCreateNewProjects()" name="projectForm" class="form-horizontal" novalidate>
+    <div class="form-group">
+        <label for="inputProjectId" class="col-sm-2 control-label">Project ID</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputProjectId" placeholder="Your Project ID in format P00123..." required ng-model="newProject.project_id" ng-pattern="projectIdPattern"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputDescription" placeholder="Your description..." required ng-model="newProject.description"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success" ng-disabled="projectForm.$invalid" ng-click="saveNewProject()">Create new Project</button>
+        </div>
+    </div>
+</form>
