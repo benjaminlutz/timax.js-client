@@ -28,7 +28,7 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#/bookings/{{ project._id }}">Show bookings</a></li>
-                    <li><a href="#/projects/users/{{ project._id }}">Manage users</a></li>
+                    <li><a ng-click="showManageUserDialog(project._id)">Manage users</a></li>
                 </ul>
             </div>
         </td>

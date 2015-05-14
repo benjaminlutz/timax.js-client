@@ -11,11 +11,30 @@
         .factory('projectService', function ($q, $http, timaxConfig, PROJECT_RESOURCE_URL) {
             var factoryObject = {};
 
+            factoryObject.createNewProject = function () {
+                return {
+                    project_id: '',
+                    description: ''
+                };
+            };
+
             factoryObject.getAllProjects = function (page) {
                 var deferred = $q.defer(),
                     pageUrl = page ? '/?page=' + page : '';
 
                 $http.get(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + pageUrl).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
+
+            factoryObject.getProject = function (projectId) {
+                var deferred = $q.defer();
+
+                $http.get(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + '/' + projectId).then(function (response) {
                     deferred.resolve(response.data);
                 }, function (err) {
                     deferred.reject(err);
