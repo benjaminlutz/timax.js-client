@@ -28,6 +28,18 @@
                 return deferred.promise;
             };
 
+            factoryObject.getProjectsByUser = function (userId) {
+                var deferred = $q.defer();
+
+                $http.get(timaxConfig.BACKEND + USER_RESOURCE_URL + '/' + userId + '/project').then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
+
             return factoryObject;
         });
 })();
