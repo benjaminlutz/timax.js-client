@@ -55,6 +55,16 @@
                 return deferred.promise;
             };
 
+            factoryObject.addUserToProject = function (userId, projectId) {
+                return $http.post(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + '/' + projectId + '/user', {
+                    userId: userId
+                });
+            };
+
+            factoryObject.deleteUserFromProject = function (userId, projectId) {
+                return $http.delete(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + '/' + projectId + '/user/' + userId);
+            };
+
             return factoryObject;
         });
 })();
