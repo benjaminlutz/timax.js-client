@@ -13,11 +13,23 @@
 
             factoryObject.createNewBooking = function () {
                 return {
-                    start: Date.now(),
-                    end: Date.now(),
+                    start: new Date(),
+                    end: new Date(),
                     description: '',
                     project: ''
                 };
+            };
+
+            factoryObject.saveNewBooking = function (newBooking) {
+                var deferred = $q.defer();
+
+                $http.post(timaxConfig.BACKEND + BOOKING_RESOURCE_URL, newBooking).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
             };
 
             return factoryObject;

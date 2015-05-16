@@ -6,15 +6,23 @@
 
 <form name="bookingForm" class="form-horizontal" novalidate>
     <div class="form-group">
-        <label for="inputStart" class="col-sm-2 control-label">Start</label>
+        <label for="inputDate" class="col-sm-2 control-label">Date</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputStart" placeholder="Start time..." required ng-model="newBooking.start"/>
+            <p class="input-group">
+                <input type="text" id="inputDate" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="newBookingDate" ng-required="true" close-text="Close" is-open="opened" starting-day="1"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEnd" class="col-sm-2 control-label">End</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputEnd" placeholder="End time..." required ng-model="newBooking.end"/>
+        <label for="inputStart" class="col-sm-2 control-label">Time</label>
+        <div class="col-sm-5">
+            <timepicker id="inputStart" ng-model="newBookingStart" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+        </div>
+        <div class="col-sm-5">
+            <timepicker id="inputEnd" ng-model="newBookingEnd" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
         </div>
     </div>
     <div class="form-group">
