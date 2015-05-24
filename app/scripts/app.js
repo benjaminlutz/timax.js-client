@@ -22,7 +22,8 @@
             'timax.interceptors.authToken',
             'timax.interceptors.httpError',
             'timax.services.authorisation',
-            'timax.services.project'
+            'timax.services.project',
+            'timax.services.booking'
         ])
 
         .config(function (localStorageServiceProvider) {
@@ -71,6 +72,9 @@
                     resolve: {
                         authorizedUser: function (authorisationService) {
                             return authorisationService.isAuthorizedAsync('user');
+                        },
+                        bookings: function (bookingService) {
+                            return bookingService.getBookings();
                         }
                     }
                 })

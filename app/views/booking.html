@@ -1,6 +1,41 @@
 <h1>Bookings</h1>
 
-<p>Bookings list with pagination here...</p>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Start</th>
+        <th>End</th>
+        <th>Description</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="booking in bookings">
+        <td>
+            {{ booking.start | asDate | date:'dd.MM.yyyy HH:mm'}}
+        </td>
+        <td>
+            {{ booking.end | asDate | date:'dd.MM.yyyy HH:mm'}}
+        </td>
+        <td>
+            {{ booking.description }}
+        </td>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
+                    <span class="glyphicon glyphicon-edit"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#/bookings/{{ project._id }}"><span class="glyphicon glyphicon-time"></span> Show booking</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 <h3>Add new Booking</h3>
 

@@ -32,6 +32,19 @@
                 return deferred.promise;
             };
 
+            factoryObject.getBookings = function (page) {
+                var deferred = $q.defer(),
+                    pageUrl = page ? '/?page=' + page : '';
+
+                $http.get(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + pageUrl).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
+
             return factoryObject;
         });
 })();
