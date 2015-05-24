@@ -4,14 +4,14 @@
     /**
      * Project controller.
      */
-    angular.module('timax.controllers.project', ['ui.bootstrap', 'angularModalService', 'timax.services.project', 'timax.controllers.modals.manageUser', 'timax.config'])
+    angular.module('timax.controllers.project', ['ui.bootstrap', 'angularModalService', 'timax.services.project', 'timax.services.pagination', 'timax.controllers.modals.manageUser', 'timax.config'])
 
-        .controller('ProjectController', function ($scope, authorizedUser, projects, ModalService, projectService, timaxConfig) {
+        .controller('ProjectController', function ($scope, authorizedUser, projects, ModalService, projectService, paginationService, timaxConfig) {
             $scope.projectIdPattern = timaxConfig.PROJECT_ID_PATTERN;
 
             $scope.projects = projects.documents;
-            $scope.totalItems = projects.totalPages * 10;
-            $scope.currentPage = projects.nextPage > 1 ? projects.nextPage - 1 : 1;
+            $scope.totalItems = paginationService.calculateTotalItems(projects.totalPages);
+            $scope.currentPage = paginationService.initCurrentPage(projects.nextPage);
 
             $scope.newProject = projectService.createNewProject();
 

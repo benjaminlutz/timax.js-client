@@ -4,12 +4,12 @@
     /**
      * Booking controller.
      */
-    angular.module('timax.controllers.booking', ['timax.services.user', 'timax.services.booking', 'timax.filters.asDate'])
+    angular.module('timax.controllers.booking', ['timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
 
-        .controller('BookingController', function ($scope, authorizedUser, bookings, userService, bookingService) {
+        .controller('BookingController', function ($scope, authorizedUser, bookings, userService, bookingService, paginationService) {
             $scope.bookings = bookings.documents;
-            $scope.totalItems = bookings.totalPages * 10;
-            $scope.currentPage = bookings.nextPage > 1 ? bookings.nextPage - 1 : 1;
+            $scope.totalItems = paginationService.calculateTotalItems(bookings.totalPages);
+            $scope.currentPage = paginationService.initCurrentPage(bookings.nextPage);
 
             $scope.pageChanged = function () {
                 bookingService.getBookings($scope.currentPage).then(function (data) {
@@ -17,15 +17,15 @@
                 });
             };
 
-            $scope.projects = [];
-
-            $scope.newBooking = bookingService.createNewBooking();
-            $scope.newBookingDate = new Date();
-            $scope.newBookingStart = new Date(2015,0,1,8,30);
-            $scope.newBookingEnd = new Date(2015,0,1,18,30);
+            function initNewBooking() {
+                $scope.newBooking = bookingService.createNewBooking();
+                $scope.newBookingDate = new Date();
+                $scope.newBookingStart = new Date(2015, 0, 1, 8, 30);
+                $scope.newBookingEnd = new Date(2015, 0, 1, 18, 30);
+            }
 
             $scope.opened = false;
-            $scope.open = function($event) {
+            $scope.open = function ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
 
@@ -33,21 +33,16 @@
             };
 
             $scope.saveNewBooking = function () {
-                $scope.newBooking.start = new Date($scope.newBookingDate.getFullYear(), $scope.newBookingDate.getMonth(), $scope.newBookingDate.getDate(),
-                    $scope.newBookingStart.getHours(), $scope.newBookingStart.getMinutes());
-
-                $scope.newBooking.end = new Date($scope.newBookingDate.getFullYear(), $scope.newBookingDate.getMonth(), $scope.newBookingDate.getDate(),
-                    $scope.newBookingEnd.getHours(), $scope.newBookingEnd.getMinutes());
-
-                // TODO convert timezone
-
-                bookingService.saveNewBooking($scope.newBooking).then(function () {
+                bookingService.saveNewBooking($scope.newBooking, $scope.newBookingDate, $scope.newBookingStart, $scope.newBookingEnd).then(function () {
                     $scope.pageChanged();
-                    $scope.newBooking = bookingService.createNewBooking();
+                    initNewBooking();
                 });
             };
 
+            $scope.projects = [];
+
             // init
+            initNewBooking();
             userService.getProjectsByUser(authorizedUser._id).then(function (projects) {
                 $scope.projects = projects;
             });

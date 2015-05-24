@@ -20,8 +20,14 @@
                 };
             };
 
-            factoryObject.saveNewBooking = function (newBooking) {
+            factoryObject.saveNewBooking = function (newBooking, date, start, end) {
                 var deferred = $q.defer();
+
+                newBooking.start = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                    start.getHours(), start.getMinutes());
+
+                newBooking.end = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                    end.getHours(), end.getMinutes());
 
                 $http.post(timaxConfig.BACKEND + BOOKING_RESOURCE_URL, newBooking).then(function (response) {
                     deferred.resolve(response.data);
