@@ -4,11 +4,11 @@
     /**
      * Booking service.
      */
-    angular.module('timax.services.booking', ['timax.config'])
+    angular.module('timax.services.booking', ['timax.services.queryString', 'timax.config'])
 
         .constant('BOOKING_RESOURCE_URL', 'booking')
 
-        .factory('bookingService', function ($q, $http, timaxConfig, BOOKING_RESOURCE_URL) {
+        .factory('bookingService', function ($q, $http, queryStringService, timaxConfig, BOOKING_RESOURCE_URL) {
             var factoryObject = {};
 
             factoryObject.createNewBooking = function () {
@@ -38,11 +38,19 @@
                 return deferred.promise;
             };
 
-            factoryObject.getBookings = function (page) {
+            factoryObject.getBookings = function (page, projectId) {
                 var deferred = $q.defer(),
-                    pageUrl = page ? '/?page=' + page : '';
+                    queryObject = {};
 
-                $http.get(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + pageUrl).then(function (response) {
+                if (page !== undefined && page !== '') {
+                    queryObject.page = page;
+                }
+
+                if (projectId !== undefined && projectId !== '') {
+                    queryObject.project = projectId;
+                }
+
+                $http.get(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + '/' + queryStringService.convertObjectToQueryString(queryObject)).then(function (response) {
                     deferred.resolve(response.data);
                 }, function (err) {
                     deferred.reject(err);

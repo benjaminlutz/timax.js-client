@@ -4,11 +4,11 @@
     /**
      * Project service.
      */
-    angular.module('timax.services.project', ['timax.config'])
+    angular.module('timax.services.project', ['timax.services.queryString', 'timax.config'])
 
         .constant('PROJECT_RESOURCE_URL', 'project')
 
-        .factory('projectService', function ($q, $http, timaxConfig, PROJECT_RESOURCE_URL) {
+        .factory('projectService', function ($q, $http, queryStringService, timaxConfig, PROJECT_RESOURCE_URL) {
             var factoryObject = {};
 
             factoryObject.createNewProject = function () {
@@ -20,9 +20,13 @@
 
             factoryObject.getAllProjects = function (page) {
                 var deferred = $q.defer(),
-                    pageUrl = page ? '/?page=' + page : '';
+                    queryObject = {};
 
-                $http.get(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + pageUrl).then(function (response) {
+                if (page !== undefined && page !== '') {
+                    queryObject.page = page;
+                }
+
+                $http.get(timaxConfig.BACKEND + PROJECT_RESOURCE_URL + '/' + queryStringService.convertObjectToQueryString(queryObject)).then(function (response) {
                     deferred.resolve(response.data);
                 }, function (err) {
                     deferred.reject(err);
