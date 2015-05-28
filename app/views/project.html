@@ -36,7 +36,7 @@
     </tbody>
 </table>
 
-<pagination ng-hide="projects.length <= 10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+<pagination ng-hide="totalItems <= 10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 <h3 ng-show="canCreateNewProjects()">Add new Project</h3>
 

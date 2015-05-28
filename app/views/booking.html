@@ -8,6 +8,7 @@
         <th>End</th>
         <th>Project</th>
         <th>Description</th>
+        <th>User</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -29,6 +30,9 @@
             {{ booking.description }}
         </td>
         <td>
+            {{ booking.user.firstName }} {{ booking.user.lastName }}
+        </td>
+        <td>
             <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">
@@ -43,7 +47,7 @@
     </tbody>
 </table>
 
-<pagination ng-hide="bookings.length <= 10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+<pagination ng-hide="totalItems <= 10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
 <h3>Add new Booking</h3>
 
@@ -79,7 +83,7 @@
     <div class="form-group">
         <label for="inputDescription" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputDescription" placeholder="Your description..." required ng-model="newBooking.description"/>
+            <input type="text" class="form-control" id="inputDescription" placeholder="Your description..." required maxlength="75" ng-model="newBooking.description"/>
         </div>
     </div>
     <div class="form-group">
