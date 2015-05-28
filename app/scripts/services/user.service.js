@@ -32,6 +32,10 @@
                 var deferred = $q.defer();
 
                 $http.get(timaxConfig.BACKEND + USER_RESOURCE_URL + '/' + userId + '/project').then(function (response) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        var project = response.data[i];
+                        project.formattedName = project.project_id + ' (' + project.description + ')';
+                    }
                     deferred.resolve(response.data);
                 }, function (err) {
                     deferred.reject(err);
