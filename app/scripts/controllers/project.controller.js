@@ -8,16 +8,23 @@
 
         .controller('ProjectController', function ($scope, authorizedUser, projects, ModalService, projectService, paginationService, timaxConfig) {
             $scope.projectIdPattern = timaxConfig.PROJECT_ID_PATTERN;
-
-            $scope.projects = projects.documents;
-            $scope.totalItems = paginationService.calculateTotalItems(projects.totalPages);
-            $scope.currentPage = paginationService.initCurrentPage(projects.nextPage);
-
             $scope.newProject = projectService.createNewProject();
+
+            $scope.projects = [];
+            $scope.totalItems = 0;
+            $scope.currentPage = 1;
+
+            function initPagination(documents, totalPages, nextPage) {
+                $scope.projects = documents;
+                $scope.totalItems = paginationService.calculateTotalItems(totalPages);
+                if (nextPage !== undefined) {
+                    $scope.currentPage = paginationService.initCurrentPage(nextPage);
+                }
+            }
 
             $scope.pageChanged = function () {
                 projectService.getAllProjects($scope.currentPage).then(function (data) {
-                    $scope.projects = data.documents;
+                    initPagination(data.documents, data.totalPages);
                 });
             };
 
@@ -48,5 +55,8 @@
                     });
                 });
             };
+
+            //init
+            initPagination(projects.documents, projects.totalPages, projects.nextPage);
         });
 })();

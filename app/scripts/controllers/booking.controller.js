@@ -7,15 +7,19 @@
     angular.module('timax.controllers.booking', ['timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
 
         .controller('BookingController', function ($scope, authorizedUser, bookings, userService, bookingService, paginationService) {
-            $scope.bookings = bookings.documents;
-            $scope.totalItems = paginationService.calculateTotalItems(bookings.totalPages);
-            $scope.currentPage = paginationService.initCurrentPage(bookings.nextPage);
+            $scope.bookings = [];
+            $scope.totalItems = 0;
+            $scope.currentPage = 1;
+            $scope.projects = [];
+            $scope.opened = false;
 
-            $scope.pageChanged = function () {
-                bookingService.getBookings($scope.currentPage).then(function (data) {
-                    $scope.bookings = data.documents;
-                });
-            };
+            function initPagination(documents, totalPages, nextPage) {
+                $scope.bookings = documents;
+                $scope.totalItems = paginationService.calculateTotalItems(totalPages);
+                if (nextPage !== undefined) {
+                    $scope.currentPage = paginationService.initCurrentPage(nextPage);
+                }
+            }
 
             function initNewBooking() {
                 $scope.newBooking = bookingService.createNewBooking();
@@ -24,11 +28,15 @@
                 $scope.newBookingEnd = new Date(2015, 0, 1, 18, 30);
             }
 
-            $scope.opened = false;
-            $scope.open = function ($event) {
+            $scope.pageChanged = function () {
+                bookingService.getBookings($scope.currentPage).then(function (data) {
+                    initPagination(data.documents, data.totalPages);
+                });
+            };
+
+            $scope.openDatePicker = function ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
-
                 $scope.opened = true;
             };
 
@@ -39,10 +47,9 @@
                 });
             };
 
-            $scope.projects = [];
-
             // init
             initNewBooking();
+            initPagination(bookings.documents, bookings.totalPages, bookings.nextPage);
             userService.getProjectsByUser(authorizedUser._id).then(function (projects) {
                 $scope.projects = projects;
             });

@@ -8,7 +8,6 @@
 
         .controller('ManageUserController', function ($scope, $element, userService, projectService, project, close) {
             $scope.project = project;
-
             $scope.selected = undefined;
 
             $scope.addButtonDisabled = function () {
