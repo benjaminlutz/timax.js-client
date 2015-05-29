@@ -13,5 +13,9 @@
             $scope.close = function (result) {
                 close(result, 500);
             };
+
+            $scope.isValidationError = function () {
+                return $scope.errorObject.name === 'ValidationError';
+            };
         });
 })();

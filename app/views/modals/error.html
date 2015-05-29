@@ -8,7 +8,17 @@
             </div>
                 <div class="modal-body">
                     <h2>{{ messageText }}</h2>
-                    <div ng-show="errorObject" class="well">
+
+                    <div ng-show="isValidationError()">
+                        <h3>Validation errors:</h3>
+                        <ul>
+                            <li ng-repeat="valError in errorObject.errors">
+                                {{ valError.message }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div ng-show="errorObject && !isValidationError()" class="well">
                         {{ errorObject }}
                     </div>
                 </div>
