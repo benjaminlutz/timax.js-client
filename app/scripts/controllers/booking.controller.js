@@ -4,9 +4,9 @@
     /**
      * Booking controller.
      */
-    angular.module('timax.controllers.booking', ['timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
+    angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
 
-        .controller('BookingController', function ($scope, authorizedUser, bookings, userService, bookingService, paginationService) {
+        .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService) {
             $scope.bookings = [];
             $scope.totalItems = 0;
             $scope.currentPage = 1;
@@ -57,6 +57,27 @@
 
             $scope.canCreateBooking = function () {
                 return authorizedUser.role === 'user';
+            };
+
+            $scope.editBooking = function (bookingId) {
+                console.log('edit booking: ' + bookingId);
+            };
+
+            $scope.deleteBooking = function (bookingId) {
+                ModalService.showModal({
+                    templateUrl: 'views/modals/confirmation.html',
+                    controller: 'ConfirmationController',
+                    inputs: {
+                        message: 'Do you really want to delete the booking?'
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        if (result) {
+                            console.log('delete booking: ' + bookingId);
+                        }
+                    });
+                });
             };
 
             // init
