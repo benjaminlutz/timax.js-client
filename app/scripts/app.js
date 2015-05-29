@@ -16,12 +16,14 @@
             'timax.config',
             'timax.controllers.start',
             'timax.controllers.logout',
+            'timax.controllers.user',
             'timax.controllers.project',
             'timax.controllers.booking',
             'timax.directives.navigation',
             'timax.interceptors.authToken',
             'timax.interceptors.httpError',
             'timax.services.authorisation',
+            'timax.services.user',
             'timax.services.project',
             'timax.services.booking'
         ])
@@ -49,6 +51,20 @@
                     requiredRole: 'none',
                     templateUrl: 'views/start.html',
                     controller: 'StartController'
+                })
+                .when('/user', {
+                    name: 'User',
+                    requiredRole: 'admin',
+                    templateUrl: 'views/user.html',
+                    controller: 'UserController',
+                    resolve: {
+                        authorizedUser: function (authorisationService) {
+                            return authorisationService.isAuthorizedAsync('admin');
+                        },
+                        user: function (userService) {
+                            return userService.getAllUser();
+                        }
+                    }
                 })
                 .when('/projects', {
                     name: 'Projects',

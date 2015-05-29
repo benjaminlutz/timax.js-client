@@ -4,12 +4,29 @@
     /**
      * User service.
      */
-    angular.module('timax.services.user', ['timax.config'])
+    angular.module('timax.services.user', ['timax.services.queryString', 'timax.config'])
 
         .constant('USER_RESOURCE_URL', 'user')
 
-        .factory('userService', function ($q, $http, timaxConfig, USER_RESOURCE_URL) {
+        .factory('userService', function ($q, $http, queryStringService, timaxConfig, USER_RESOURCE_URL) {
             var factoryObject = {};
+
+            factoryObject.getAllUser = function (page) {
+                var deferred = $q.defer(),
+                    queryObject = {};
+
+                if (page !== undefined && page !== '') {
+                    queryObject.page = page;
+                }
+
+                $http.get(timaxConfig.BACKEND + USER_RESOURCE_URL + '/' + queryStringService.convertObjectToQueryString(queryObject)).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
 
             factoryObject.searchUser = function (searchString) {
                 var deferred = $q.defer(),

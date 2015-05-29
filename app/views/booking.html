@@ -8,8 +8,8 @@
         <th>End</th>
         <th>Project</th>
         <th>Description</th>
-        <th>User</th>
-        <th>Action</th>
+        <th ng-show="canSeeUserRow()">User</th>
+        <th ng-show="canEditBooking()">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -29,10 +29,10 @@
         <td>
             {{ booking.description }}
         </td>
-        <td>
+        <td ng-show="canSeeUserRow()">
             {{ booking.user.firstName }} {{ booking.user.lastName }}
         </td>
-        <td>
+        <td ng-show="canEditBooking()">
             <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                         aria-expanded="false">
@@ -49,9 +49,9 @@
 
 <pagination ng-show="totalItems > 10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 
-<h3>Add new Booking</h3>
+<h3 ng-show="canCreateBooking()">Add new Booking</h3>
 
-<form name="bookingForm" class="form-horizontal" novalidate>
+<form ng-show="canCreateBooking()" name="bookingForm" class="form-horizontal" novalidate>
     <div class="form-group">
         <label for="inputDate" class="col-sm-2 control-label">Date</label>
         <div class="col-sm-10">

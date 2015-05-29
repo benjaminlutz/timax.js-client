@@ -47,6 +47,18 @@
                 });
             };
 
+            $scope.canSeeUserRow = function () {
+                return authorizedUser.role !== 'user';
+            };
+
+            $scope.canEditBooking = function () {
+                return authorizedUser.role === 'admin' || authorizedUser.role === 'user';
+            };
+
+            $scope.canCreateBooking = function () {
+                return authorizedUser.role === 'user';
+            };
+
             // init
             initNewBooking();
             initPagination(bookings.documents, bookings.totalPages, bookings.nextPage);
