@@ -6,12 +6,16 @@
      */
     angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.controllers.modals.editBooking', 'timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
 
-        .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService) {
+        .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService, timaxSocket) {
             $scope.bookings = [];
             $scope.totalItems = 0;
             $scope.currentPage = 1;
             $scope.projects = [];
             $scope.opened = false;
+
+            $scope.$on('socket:booking', function (ev, data) {
+                console.log(data);
+            });
 
             function initPagination(documents, totalPages, nextPage) {
                 $scope.bookings = documents;
