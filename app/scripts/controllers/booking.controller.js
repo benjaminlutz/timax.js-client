@@ -4,7 +4,7 @@
     /**
      * Booking controller.
      */
-    angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
+    angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.controllers.modals.editBooking', 'timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
 
         .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService) {
             $scope.bookings = [];
@@ -59,11 +59,24 @@
                 return authorizedUser.role === 'user';
             };
 
-            $scope.editBooking = function (bookingId) {
-                console.log('edit booking: ' + bookingId);
+            $scope.editBooking = function (booking) {
+                ModalService.showModal({
+                    templateUrl: 'views/modals/editBooking.html',
+                    controller: 'EditBookingController',
+                    inputs: {
+                        booking: booking
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                    modal.close.then(function (result) {
+                        if (result) {
+                            $scope.pageChanged();
+                        }
+                    });
+                });
             };
 
-            $scope.deleteBooking = function (bookingId) {
+            $scope.deleteBooking = function (booking) {
                 ModalService.showModal({
                     templateUrl: 'views/modals/confirmation.html',
                     controller: 'ConfirmationController',
@@ -74,7 +87,7 @@
                     modal.element.modal();
                     modal.close.then(function (result) {
                         if (result) {
-                            bookingService.deleteBooking(bookingId).then(function () {
+                            bookingService.deleteBooking(booking._id).then(function () {
                                 $scope.pageChanged();
                             });
                         }

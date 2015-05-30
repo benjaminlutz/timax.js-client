@@ -38,6 +38,16 @@
                 return deferred.promise;
             };
 
+            factoryObject.updateBooking = function (booking, date, start, end) {
+                booking.start = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                    start.getHours(), start.getMinutes());
+
+                booking.end = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                    end.getHours(), end.getMinutes());
+
+                return $http.put(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + '/' + booking._id, booking);
+            };
+
             factoryObject.getBookings = function (page, projectId) {
                 var deferred = $q.defer(),
                     queryObject = {};
