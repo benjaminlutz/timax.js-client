@@ -10,7 +10,7 @@
                     <h2>{{ messageText }}</h2>
 
                     <div ng-show="isValidationError()">
-                        <h3>Validation errors:</h3>
+                        <p>Validation errors:</p>
                         <ul>
                             <li ng-repeat="valError in errorObject.errors">
                                 {{ valError.message }}

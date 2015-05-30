@@ -74,7 +74,9 @@
                     modal.element.modal();
                     modal.close.then(function (result) {
                         if (result) {
-                            console.log('delete booking: ' + bookingId);
+                            bookingService.deleteBooking(bookingId).then(function () {
+                                $scope.pageChanged();
+                            });
                         }
                     });
                 });

@@ -59,6 +59,22 @@
                 return deferred.promise;
             };
 
+            factoryObject.getBooking = function (bookingId) {
+                var deferred = $q.defer();
+
+                $http.get(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + '/' + bookingId).then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
+            };
+
+            factoryObject.deleteBooking = function (bookingId) {
+                return $http.delete(timaxConfig.BACKEND + BOOKING_RESOURCE_URL + '/' + bookingId);
+            };
+
             return factoryObject;
         });
 })();
