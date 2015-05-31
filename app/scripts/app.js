@@ -13,7 +13,6 @@
             'ngSanitize',
             'ngTouch',
             'LocalStorageModule',
-            'btford.socket-io',
             'timax.config',
             'timax.controllers.start',
             'timax.controllers.logout',
@@ -34,18 +33,6 @@
                 .setPrefix('timax')
                 .setStorageType('localStorage')
                 .setNotify(true, true);
-        })
-
-        .factory('timaxSocket', function (socketFactory, localStorageService) {
-            var token = localStorageService.get('token');
-
-            var timaxSocket = socketFactory({
-                ioSocket: io.connect('http://localhost:7777/', {
-                    query: 'token=' + token
-                })
-            });
-            timaxSocket.forward('booking');
-            return timaxSocket;
         })
 
         .config(function ($httpProvider) {

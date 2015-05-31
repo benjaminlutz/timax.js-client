@@ -4,9 +4,9 @@
     /**
      * Booking controller.
      */
-    angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.controllers.modals.editBooking', 'timax.services.user', 'timax.services.booking', 'timax.filters.asDate', 'timax.services.pagination'])
+    angular.module('timax.controllers.booking', ['angularModalService', 'timax.controllers.modals.confirmation', 'timax.controllers.modals.editBooking', 'timax.services.user', 'timax.services.booking', 'timax.services.socket', 'timax.filters.asDate', 'timax.services.pagination'])
 
-        .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService, timaxSocket) {
+        .controller('BookingController', function ($scope, authorizedUser, bookings, ModalService, userService, bookingService, paginationService, socketService) {
             $scope.bookings = [];
             $scope.totalItems = 0;
             $scope.currentPage = 1;
