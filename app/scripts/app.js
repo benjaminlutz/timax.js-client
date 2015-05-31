@@ -13,6 +13,7 @@
             'ngSanitize',
             'ngTouch',
             'LocalStorageModule',
+            'angular-growl',
             'timax.config',
             'timax.controllers.start',
             'timax.controllers.logout',
@@ -43,6 +44,11 @@
             $httpProvider.interceptors.push('authTokenInterceptor');
             $httpProvider.interceptors.push('httpErrorInterceptor');
         })
+
+        .config(['growlProvider', function (growlProvider) {
+            growlProvider.globalReversedOrder(true);
+            growlProvider.globalTimeToLive(3000);
+        }])
 
         .config(function ($routeProvider) {
             $routeProvider
