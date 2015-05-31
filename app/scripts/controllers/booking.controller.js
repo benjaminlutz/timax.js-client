@@ -14,7 +14,10 @@
             $scope.opened = false;
 
             $scope.$on('socket:booking', function (ev, data) {
-                growl.info(data.description,  {title: 'New Booking'});
+                var message = 'from <b>' + data.user + '</b> on project <b>' + data.project + '</b><br/>';
+                message = message + 'with description: ' + data.description + '<br/>';
+
+                growl.info(message, {title: 'New Booking'});
             });
 
             function initPagination(documents, totalPages, nextPage) {

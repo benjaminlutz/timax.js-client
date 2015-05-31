@@ -47,7 +47,8 @@
 
         .config(['growlProvider', function (growlProvider) {
             growlProvider.globalReversedOrder(true);
-            growlProvider.globalTimeToLive(3000);
+            growlProvider.globalTimeToLive(4000);
+            growlProvider.globalDisableCountDown(true);
         }])
 
         .config(function ($routeProvider) {
