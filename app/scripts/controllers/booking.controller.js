@@ -44,6 +44,7 @@
                 bookingService.saveNewBooking($scope.newBooking, $scope.newBookingDate, $scope.newBookingStart, $scope.newBookingEnd).then(function () {
                     $scope.pageChanged();
                     initNewBooking();
+                    growl.success('New booking saved.');
                 });
             };
 
@@ -71,6 +72,7 @@
                     modal.close.then(function (result) {
                         if (result) {
                             $scope.pageChanged();
+                            growl.success('Changed booking saved.');
                         }
                     });
                 });
@@ -89,6 +91,7 @@
                         if (result) {
                             bookingService.deleteBooking(booking._id).then(function () {
                                 $scope.pageChanged();
+                                growl.success('Booking deleted.');
                             });
                         }
                     });
