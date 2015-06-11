@@ -44,11 +44,26 @@ app/scripts/config.js
 file.
 
 ## Start the application
-If everything is installed and configured, just type the following command to start the application:
+If everything is installed and configured, just type the following command to start the application in the live reload webserver:
 
 ```
 $ grunt
 ```
+
+## Development
+To run the tests:
+
+```
+$ grunt test
+```
+
+To build the distribution package which can be deployed to a any webserver:
+
+```
+$ grunt build
+```
+
+The output will be in the dist folder.
 
 ## License
 The MIT License (MIT)
